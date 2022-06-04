@@ -1,0 +1,143 @@
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content "width=device-width,initial-scale=1.0">
+        <title>Path</title>
+        <script type="text/javascript">
+           function check(){
+        alert(document.pa.path.value);
+           }
+        function itemSelected(selectedValue){
+                alert("선택 항목:"+selectedValue);
+         }
+
+         
+        </script>
+
+        <style>
+            .main-div{
+                width : 900;
+                height : auto;
+                display : flex;
+                flex-direction: column;
+                margin : 0 auto;
+
+                border :solid red;
+
+            }
+
+            .image-main-area{
+                width: 100%;
+                height : 300px;
+                display : flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                border : solid blue;
+
+
+            }
+
+            .image-main-area > div{
+                width : 40%;
+                height : 100px;
+                height : auto;
+
+                display : flex;
+                justify-content: center;
+                align-items: center;
+
+                border : solid green;
+            }
+        </style>
+</head>
+        <body>
+            <div class = "main-div">
+                <h1>산책 경로 추천</h1>
+                <form action="a.jsp" method="get" name="pa">
+                    <label for="path-select">산책 예상 시간:</label>
+        
+                    <select name="path" id = "select-box timeSelect" class = "time-select" onchange="handleTime()">
+                            <option value="min">30분</option>
+                            <option value="hour">1시간</option>
+                    </select>
+                    <label for="walk-select">걷기/뛰기:</label>
+        
+                    <select name="walk-choose" id = "select-box typeSelect" class = "type-select" onchange="handleType()">
+                            <option value="walk">걷기</option>
+                            <option value="run">뛰기</option>
+                    </select>
+                    <input type="button" value="확인" onclick="handleImage()">
+                </form>
+        
+                <div class = "image-main-area">
+                    <div id = "image-placer-1">
+                        
+                    </div>
+                    <div id = "image-placer-2">
+        
+                    </div>
+                </div>
+            </div>
+        
+</body>
+
+<script>
+
+    let time = "min";
+    let type = "walk";
+
+
+    const handleTime = () =>{
+        var e = document.querySelector(".time-select");
+        var value = e.value;
+        if(value == "hour")
+            time = "hour";
+        else{
+            time = "min"
+        }
+        console.log(value);
+    }
+
+    const handleType = () =>{
+        var e = document.querySelector(".type-select");
+        var value = e.value;
+        if(value == "run"){
+           type = "run";
+        }
+        else{
+            type = "walk"
+        }
+       
+        console.log(value);
+    }
+    const handleImage = () =>{
+        handleType();
+        handleTime();
+        // let elem
+        // elem.src = './03_darkMode.png';
+        // document.getElementById("image-placer").appendChild(elem);
+
+        // console.log(type)
+        // console.log(time)
+        if(time =="min" && type == "walk"){
+            document.getElementById('image-placer-1').innerHTML = '<img width="100%" height="100%" src="./image/image2.jpg">';
+            document.getElementById('image-placer-2').innerHTML = '<img width="100%" height="100%" src="./image/food1.jpg"><li>130kcal</li>';
+        }
+         else if(time =="hour" && type =="walk"){
+            document.getElementById('image-placer-1').innerHTML = '<img width="100%" height="100%" src="./image/image1.jpg">';
+            document.getElementById('image-placer-2').innerHTML = '<img width="100%" height="100%" src="./image/food3.jpg"><li>260kcal</li>';
+         }
+         else if(time =="min" && type == "run"){
+            document.getElementById('image-placer-1').innerHTML = '<img width="100%" height="100%" src="./image/image4.jpg">';
+            document.getElementById('image-placer-2').innerHTML = '<img width="100%" height="100%" src="./image/food4.jpg"><li>300kcal</li>';
+        }
+        else if(time =="hour" && type == "run"){ 
+            document.getElementById('image-placer-1').innerHTML = '<img width="100%" height="100%" src="./image/image3.jpg">';
+            document.getElementById('image-placer-2').innerHTML = '<img width="100%" height="100%" src="./image/food2.jpg"><li>700kcal</li>';
+        }
+    }
+
+</script>
+</html>
